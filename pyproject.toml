@@ -1,49 +1,51 @@
-[tool.poetry]
-name = "django42-keycloak"
-version = "0.2.9"
-description = "Integrate Keycloak with Django 4.2+"
-homepage = 'https://github.com/skamansam/django-keycloak'
-repository = 'https://github.com/skamansam/django-keycloak'
-keywords = ["django", "keycloak", "auth", "django42", "python311"]
-license = "MIT"
+[project]
+name = "berlin-united-django-keycloak"
+version = "0.2.6"
+description = "Integrate Keycloak with Django 5.2+"
 authors = [
-  "Samuel C. Tyler <skamansam@gmail.com>",
-  "Ahmad Dabo <dabo.cs@gmail.com>",
-  "Peter Slump <peter@yarf.nl>",
+    { name = "Stella Alice Schlotter", email = "stella.a.schlotter@gmail.com" },
+    { name = "Samuel C. Tyler", email = "skamansam@gmail.com" },
+    { name = "Ahmad Dabo", email = "dabo.cs@gmail.com" },
+    { name = "Peter Slump", email = "peter@yarf.nl" },
 ]
-readme = "README.rst"
-packages = [{include = "django_keycloak"}]
+requires-python = ">=3.12"
+readme = "README.md"
+license = "MIT"
+keywords = [
+    "django",
+    "keycloak",
+    "auth",
+    "django52",
+    "python312",
+]
 classifiers = [
     "Framework :: Django",
-    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.2",
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-[tool.poetry.urls]
-"Bug Tracker" = "https://github.com/skamansam/django-keycloak/issues"
+dependencies = [
+    "Django>=5.2",
+    "python-keycloak-client>=0.2.3,<0.3",
+]
 
-[tool.poe.tasks]
-test         = "pytest --cov=my_app"                         # a simple command task
-serve.script = "my_app.service:run(debug=True)"              # python script based task
-tunnel.shell = "ssh -N -L 0.0.0.0:8080:$PROD:8080 $PROD &"   # (posix) shell based task
+[project.urls]
+Homepage = "https://github.com/Visual-Analytics-Toolbox/django-keycloak"
+Repository = "https://github.com/Visual-Analytics-Toolbox/django-keycloak"
+"Bug Tracker" = "https://github.com/Visual-Analytics-Toolbox/django-keycloak/issues"
 
+[dependency-groups]
+dev = ["django-dynamic-fixtures>=0.2.1,<0.3"]
+test = [
+    "pytest-django>=4.5.2,<5",
+    "pytest-cov>=4.1.0,<5",
+    "mock>=5.1.0,<6",
+    "factory-boy>=3.3.0,<4",
+    "freezegun>=1.2.2,<2",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.11"
-Django = ">=4.2"
-python-keycloak-client = "^0.2.3"
-
-[tool.poetry.group.dev.dependencies]
-django-dynamic-fixtures = "^0.2.1"
-
-[tool.poetry.group.test.dependencies]
-pytest-django = "^4.5.2"
-pytest-cov = "^4.1.0"
-mock = "^5.1.0"
-factory-boy = "^3.3.0"
-freezegun = "^1.2.2"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv]
+default-groups = [
+    "dev",
+    "test",
+]
